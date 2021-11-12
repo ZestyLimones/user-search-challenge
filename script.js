@@ -2,20 +2,19 @@ const usersEl = $('#users');
 
 const apiUrl = 'https://jsonplaceholder.typicode.com/';
 
-displayUsers(users) {
-    users.forEach(element => {
-        let name = element.name;
+const displayUsers = (users) => {
+  users.forEach((element) => {
+    let name = element.name;
 
-        let addUserContainer = $('<tr>');
-        addUserContainer.attr('class', 'user-container');
-        let addUserName = $('<td>')
+    let addUserContainer = $('<tr>');
+    addUserContainer.attr('class', 'user-container');
+    let addUserName = $('<td>');
+    addUserName.text(name);
 
-        addUserName.appendTo(addUser);
-    });
-    
-
-
-}
+    addUserName.appendTo(addUserContainer);
+    addUserContainer.appendTo(usersEl);
+  });
+};
 
 const getUsers = (e) => {
   const usersApi = `${apiUrl}users/`;
@@ -29,3 +28,4 @@ const getUsers = (e) => {
   });
 };
 
+getUsers();
