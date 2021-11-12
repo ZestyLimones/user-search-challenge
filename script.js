@@ -6,11 +6,12 @@ const apiUrl = 'https://jsonplaceholder.typicode.com/';
 const displayUsers = (users) => {
   users.forEach((element) => {
     let name = element.name;
+    let userId = element.userId;
 
     let addUserContainer = $('<tr>');
     addUserContainer.attr('class', 'user-container');
     let addUserName = $('<td>');
-    addUserName.attr('class', 'user').text(name);
+    addUserName.attr('class', 'user').attr('onClick', 'getPosts()').text(name);
 
     addUserName.appendTo(addUserContainer);
     addUserContainer.appendTo(usersEl);
@@ -47,8 +48,10 @@ const displayPosts = (postData) => {
   });
 };
 
-const getPosts = (user) => {
-  let posts = `${apiUrl}users/1/posts`;
+const getPosts = (event) => {
+  let userId = event.target.userId;
+  let posts = `${apiUrl}users/${userId}/posts`;
+  //   let posts = `${apiUrl}users/1/posts`;
 
   fetch(posts).then((response) => {
     if (response.ok) {
@@ -58,7 +61,5 @@ const getPosts = (user) => {
     }
   });
 };
-
-getPosts();
 
 getUsers();
