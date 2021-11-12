@@ -9,7 +9,7 @@ const displayUsers = (users) => {
     let addUserContainer = $('<tr>');
     addUserContainer.attr('class', 'user-container');
     let addUserName = $('<td>');
-    addUserName.text(name);
+    addUserName.attr('class', 'user').text(name);
 
     addUserName.appendTo(addUserContainer);
     addUserContainer.appendTo(usersEl);
@@ -23,6 +23,18 @@ const getUsers = (e) => {
     if (response.ok) {
       response.json().then((data) => {
         displayUsers(data);
+      });
+    }
+  });
+};
+
+const getPosts = (user) => {
+  let posts = `${apiUrl}posts/${userId}`;
+
+  fetch(posts).then((response) => {
+    if (response.ok) {
+      response.json().then((data) => {
+        diplayPosts(data);
       });
     }
   });
